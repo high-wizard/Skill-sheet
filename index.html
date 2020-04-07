@@ -24,6 +24,7 @@
 </style>
 </head>
 <body>
+<div id="commonHead">
 <h2 style="text-align: center; padding-top: 20px;">業務経歴</h2>
 <h4 style="text-align: right; padding-right: 90px;" id="today"></h4>
 
@@ -37,7 +38,7 @@
 <td rowspan="2">性別</td>
 <td rowspan="2"><input type="text" placeholder="性別" maxlength="3"></td>
 <td rowspan="2">生年月日</td>
-<td rowspan="2" name="ymd"><input type="text" placeholder="yyyymmdd" maxlength="8" id="birthDay"></td>
+<td rowspan="2" name="ymd"><input type="number" oninput="sliceMaxLength(this, 8)" placeholder="yyyymmdd" id="birthDay"></td>
 <td rowspan="2">年齢</td>
 <td rowspan="2" id="age"></td>
 </tr>
@@ -92,7 +93,7 @@
 </div>
 </div>
 </div>
-
+</div>
 
 <div style="padding-top: 20px; padding-bottom: 45px; text-align: center;" id="down">
     <a class="btn-info" id="addCareer" href="#down">経歴追加</a>
@@ -155,9 +156,10 @@ const addCareer = () =>
 {
     index++;
     const HTML_TEMPLATE = `
+    <div id="career${index}" style="page-break-inside:avoid;">
     <table name="careerTable" id="careerTable${index}" border="1" style="border-collapse: collapse; margin-bottom: 20px;" width="95%">
     <tr>
-    <td colspan="10">No.${index}</td>
+    <td colspan="7">No.${index}</td>
     </tr>
     <tr>
 
@@ -166,7 +168,6 @@ const addCareer = () =>
     <td rowspan="2">開発チーム/人数</td>
     <td rowspan="2">作業内容</td>
     <td rowspan="2">職域</td>
-    <td rowspan="2">形態</td>
     <td rowspan="2">システム環境</td>
     <td rowspan="2">月数</td>
     </tr>
@@ -175,27 +176,26 @@ const addCareer = () =>
     </tr>
     
     <tr>
-        <td name="ym"><input type="text" placeholder="自 年月(yyyymm)" maxlength="6" id="start${index}"></td>
+        <td name="ym"><input type="number" placeholder="自 年月(yyyymm)" oninput="sliceMaxLength(this, 6)" id="start${index}"></td>
         <td rowspan="2"><input type="text" placeholder="●●システム"></td>
         <td rowspan="2"><input type="text" placeholder="人数"></td>
         <td rowspan="2"><input type="text" placeholder="作業内容"></td>
         <td rowspan="2"><input type="text" placeholder="職域"></td>
-        <td rowspan="2"><input type="text" placeholder="形態"></td>
         <td rowspan="2"><input type="text" placeholder="OS DB 言語"></td>
         <td rowspan="2"><input type="text" placeholder="※印刷時自動入力" id="months${index}"></td>
     </tr>
 
     <tr>
-        <td name="ym"><input type="text" placeholder="至 年月(yyyymm)" maxlength="6" id="end${index}"></td>
+        <td name="ym"><input type="number" placeholder="至 年月(yyyymm)" oninput="sliceMaxLength(this, 6)" id="end${index}"></td>
     </tr>
 
     <tr>
         <td>補足事項</td>
-        <td colspan="10"><textarea placeholder="補足事項" rows="6" cols="170"></textarea></td>
+        <td colspan="7"><textarea placeholder="補足事項" rows="6" cols="135"></textarea></td>
     </tr>
     </table>
+    </div>
     `;
-
     document.getElementById("input").insertAdjacentHTML('beforeend',HTML_TEMPLATE);
 }
 
@@ -258,6 +258,11 @@ const print = () =>
 
     window.print();
 }
+
+
+const sliceMaxLength = (elem, maxLength) => {  
+    elem.value = elem.value.slice(0, maxLength);  
+}  
 
 document.getElementById("birthDay").addEventListener('change', getAge, false);
 document.getElementById("addCareer").addEventListener('click', addCareer, false);
