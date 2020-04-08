@@ -179,8 +179,37 @@ const addCareer = () =>
         <td name="ym"><input type="number" placeholder="自 年月(yyyymm)" oninput="sliceMaxLength(this, 6)" id="start${index}"></td>
         <td rowspan="2"><input type="text" placeholder="●●システム"></td>
         <td rowspan="2"><input type="text" placeholder="人数"></td>
-        <td rowspan="2"><input type="text" placeholder="作業内容"></td>
-        <td rowspan="2"><input type="text" placeholder="職域"></td>
+
+
+        <td rowspan="2">
+        <select id="WorkContentSelector${index}">
+        <option hidden>選択してください</option>
+        <option value="要件定義">要件定義</option>
+        <option value="外部設計・基本設計">外部設計・基本設計</option>
+        <option value="内部設計・詳細設計">内部設計・詳細設計</option>
+        <option value="プログラム製造・単体テスト">プログラム製造・単体テスト</option>
+        <option value="総合テスト">総合テスト</option>
+        <option value="サポート">サポート</option>
+        <option value="オペレーション">オペレーション</option>
+        </select>
+        <button onClick="addWorkContent(${index})">作業内容追加</button>
+        <textarea id="WorkContent${index}" placeholder="作業内容(コンボボックスから追加してください)" cols="50" rows="4"></textarea>
+        </td>
+
+
+        <td rowspan="2">
+        <select id="OccupationSelector${index}">
+        <option hidden>選択してください</option>
+        <option value="プロジェクトマネージャー">プロジェクトマネージャー</option>
+        <option value="プロジェクトリーダー">プロジェクトリーダー</option>
+        <option value="サブリーダー">サブリーダー</option>
+        <option value="メンバー">メンバー</option>
+        <option value="その他">その他</option>
+        </select>
+        <button onClick="addOccupation(${index})">職域追加</button>
+        <textarea id="Occupation${index}" placeholder="職域(コンボボックスから追加してください)" cols="50" rows="4"></textarea>
+        </td>
+
         <td rowspan="2"><input type="text" placeholder="OS DB 言語"></td>
         <td rowspan="2"><input type="text" placeholder="※印刷時自動入力" id="months${index}"></td>
     </tr>
@@ -197,6 +226,39 @@ const addCareer = () =>
     </div>
     `;
     document.getElementById("input").insertAdjacentHTML('beforeend',HTML_TEMPLATE);
+}
+
+const addWorkContent = (index) =>
+{
+    if(document.getElementById(`WorkContentSelector${index}`).value=="選択してください")
+    {
+        return;
+    }
+    let addText = "";
+    if(document.getElementById(`WorkContent${index}`).value.length!=0)
+    {
+        addText += "\r\n";
+    }
+    addText += document.getElementById(`WorkContentSelector${index}`).value;
+
+    document.getElementById(`WorkContent${index}`).value += addText;
+}
+
+
+const addOccupation = (index) =>
+{
+    if(document.getElementById(`OccupationSelector${index}`).value=="選択してください")
+    {
+        return;
+    }
+    let addText = "";
+    if(document.getElementById(`Occupation${index}`).value.length!=0)
+    {
+        addText += "\r\n";
+    }
+    addText += document.getElementById(`OccupationSelector${index}`).value;
+
+    document.getElementById(`Occupation${index}`).value += addText;
 }
 
 const deleteButton = () =>
@@ -222,10 +284,7 @@ const download = () =>
 
 const valueSaver = () =>
 {
-    document.querySelectorAll("input").forEach((el) => {
-        el.defaultValue = el.value;
-    });
-    document.querySelectorAll("textarea").forEach((el) => {
+    document.querySelectorAll("input,textarea").forEach((el) => {
         el.defaultValue = el.value;
     });
 }
@@ -239,7 +298,12 @@ const print = () =>
         el.parentNode.innerText = el.value;
         el.style.display = "none";
     });
-    document.querySelectorAll("a").forEach((el) => el.style.display = "none");
+
+
+
+
+
+document.querySelectorAll("a").forEach((el) => el.style.display = "none");
     document.querySelectorAll("td[name='ymd'],td[name='ym']").forEach((el) =>
     {
         const date = el.innerText;
