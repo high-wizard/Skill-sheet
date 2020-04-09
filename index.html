@@ -24,11 +24,16 @@
     td {
         word-break:break-all;
     }
-    input,textarea,select {
+    input,textarea {
         width:100%;
     }
     select {
+        width:70%;
         height:30px;
+        float:left;
+    }
+    td > button {
+        width:30%;
     }
     input {
         height:90%
@@ -195,7 +200,7 @@ const addCareer = () =>
 
         <td rowspan="2">
         <select id="WorkContentSelector${index}">
-        <option hidden>選択してください</option>
+        <option hidden>選択肢</option>
         <option value="要件定義">要件定義</option>
         <option value="外部設計・基本設計">外部設計・基本設計</option>
         <option value="内部設計・詳細設計">内部設計・詳細設計</option>
@@ -204,22 +209,22 @@ const addCareer = () =>
         <option value="サポート">サポート</option>
         <option value="オペレーション">オペレーション</option>
         </select>
-        <button onClick="addWorkContent(${index})">作業内容追加</button>
-        <textarea id="WorkContent${index}" placeholder="作業内容\r\n(コンボボックスから追加してください)" cols="50" rows="4"></textarea>
+        <button onClick="addWorkContent(${index})">追加</button>
+        <textarea id="WorkContent${index}" placeholder="作業内容(コンボボックスから追加してください)" cols="50" rows="4"></textarea>
         </td>
 
 
         <td rowspan="2">
-        <select id="OccupationSelector${index}">
-        <option hidden>選択してください</option>
+        <select id="OccupationSelector${index}" width="80%">
+        <option hidden>選択肢</option>
         <option value="プロジェクトマネージャー">プロジェクトマネージャー</option>
         <option value="プロジェクトリーダー">プロジェクトリーダー</option>
         <option value="サブリーダー">サブリーダー</option>
         <option value="メンバー">メンバー</option>
         <option value="その他">その他</option>
         </select>
-        <button onClick="addOccupation(${index})">職域追加</button>
-        <textarea id="Occupation${index}" placeholder="職域\r\n(コンボボックスから追加してください)" cols="50" rows="4"></textarea>
+        <button onClick="addOccupation(${index})">追加</button>
+        <textarea id="Occupation${index}" placeholder="職域(コンボボックスから追加してください)" cols="50" rows="4"></textarea>
         </td>
 
         <td rowspan="2"><input type="text" placeholder="OS DB 言語"></td>
