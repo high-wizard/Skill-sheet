@@ -1,6 +1,17 @@
-<html lang="ja">
-<head>
+<html lang="ja"><head>
 <meta charset="UTF-8">
+
+<p style="padding-top: 20px; padding-left: 20px; font-size: large;">
+※こちらは見本です<br>
+※経歴追加ボタンを押すことで経歴の入力欄が追加されます<br>
+※経歴削除ボタンを押すことで最下部の経歴の入力欄が削除されます<br>
+※記入し終えたら保存ボタンを押し、保存されたファイルを送付してください<br>
+※保存したファイルは経歴書更新時にも使えるので保管してください<br>
+<button onclick="window.close();">戻る</button>
+</p>
+
+<hr>
+
 <title>業務経歴書</title>
 <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -38,80 +49,124 @@
 <body>
 <div id="commonHead">
 <h2 style="text-align: center; padding-top: 20px;">業務経歴</h2>
-<h4 style="text-align: right; padding-right: 90px;" id="today"></h4>
+<h4 style="text-align: right; padding-right: 90px;" id="today">作成日：2020/4/9</h4>
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-auto flex-md-fill" id="input">
-<table border="1" style="border-collapse: collapse;margin-bottom: 20px;" width="95%">
-<tr>
+<br><table border="1" style="border-collapse: collapse;margin-bottom: 20px;" width="95%">
+<tbody><tr>
 <td rowspan="2">氏名</td>
-<td><input type="text" placeholder="フリガナ"></td>
+<td>サンプル タロウ</td>
 <td rowspan="2">性別</td>
-<td rowspan="2"><input type="text" placeholder="性別" maxlength="3"></td>
+<td rowspan="2">男</td>
 <td rowspan="2">生年月日</td>
-<td rowspan="2" name="ymd"><input type="number" oninput="sliceMaxLength(this, 8)" placeholder="yyyymmdd" id="birthDay"></td>
+<td rowspan="2" name="ymd">1995/10/01</td>
 <td rowspan="2">年齢</td>
-<td rowspan="2" id="age"></td>
+<td rowspan="2" id="age">24</td>
 </tr>
 
 <tr>
-<td><input type="text" placeholder="氏名"></td>
+<td>サンプル 太郎</td>
 </tr>
 
 <tr>
     <td colspan="1">現住所</td>
-    <td colspan="7"><input type="text" placeholder="現住所" size="120"></td>
+    <td colspan="7">北海道札幌市XXX</td>
 </tr>
 
 <tr>
     <td>交通機関</td>
-    <td colspan="3"><input type="text" placeholder="●●線" size="30"></td>
+    <td colspan="3">南北線</td>
     <td>最寄駅</td>
-    <td colspan="3"><input type="text" placeholder="●●駅" size="30"></td>
+    <td colspan="3">麻生駅</td>
 </tr>
 
 <tr>
     <td>学歴</td>
-    <td colspan="7"><input type="text" placeholder="" size="120"></td>
+    <td colspan="7">北海道大学経済学部 卒業</td>
 </tr>
 
 <tr>
     <td>免許/資格</td>
-    <td colspan="7"><input type="text" placeholder="" size="120"></td>
+    <td colspan="7">普通自動車免許</td>
 </tr>
 
-<br>
+
 
 <tr>
     <td>PCスキル</td>
-    <td colspan="7"><input type="text" placeholder="使用可能なOS等を記載" size="120"></td>
+    <td colspan="7">Windows</td>
 </tr>
 <tr>
     <td>使用可能言語、ツール</td>
-    <td colspan="7"><input type="text" placeholder="使用可能な言語、ツールを記載" size="120"></td>
+    <td colspan="7">Java, C#, JavaScript, PostgreSQL, OracleDB, TortoiseSVN, TortoiseGit</td>
 </tr>
 <tr>
     <td>対応可能な作業、職域</td>
-    <td colspan="7"><input type="text" placeholder="" size="120"></td>
+    <td colspan="7">外部設計、詳細設計、プログラム製造 メンバ</td>
 </tr>
 <tr>
     <td>特記事項</td>
-    <td colspan="7"><input type="text" placeholder="" size="120"></td>
+    <td colspan="7"></td>
 </tr>
-</table>
+</tbody></table>
 
-</div>
+
+    <div id="career1" style="page-break-inside:avoid;">
+    <table name="careerTable" id="careerTable1" border="1" style="border-collapse: collapse; margin-bottom: 20px;">
+    <tbody><tr>
+    <td colspan="7">No.1</td>
+    </tr>
+    <tr>
+
+    <td rowspan="2">年月</td>
+    <td rowspan="2">システム名/事業内容</td>
+    <td rowspan="2">開発チーム/人数</td>
+    <td rowspan="2">作業内容</td>
+    <td rowspan="2">職域</td>
+    <td rowspan="2">システム環境</td>
+    <td rowspan="2">月数</td>
+    </tr>
+    
+    <tr>
+    </tr>
+    
+    <tr>
+        <td name="ym">2018/04</td>
+        <td rowspan="2">電力事業者向け基幹システム</td>
+        <td rowspan="2">20</td>
+
+
+        <td rowspan="2">プログラム製造・単体テスト<br>総合テスト</td>
+
+
+        <td rowspan="2">メンバー</td>
+
+        <td rowspan="2">Oracle,Java</td>
+        <td rowspan="2">12</td>
+    </tr>
+
+    <tr>
+        <td name="ym">2019/03</td>
+    </tr>
+
+    <tr>
+        <td>補足事項</td>
+        <td colspan="6">【システム概要】<br>　顧客、契約等の情報を管理するシステム<br>【業務内容】<br>　コーディング、単体テスト、結合テスト、データ移行、総合テストを実施</td>
+    </tr>
+    </tbody></table>
+    </div>
+    </div>
 </div>
 </div>
 </div>
 
 <div style="padding-top: 20px; padding-bottom: 45px; text-align: center;" id="down">
-    <a class="btn-info" href="./sample.html" target="_blank">見本を見る</a>
-    <a class="btn-info" id="addCareer" href="#down">経歴追加</a>
-    <a class="btn-info" id="deleteButton" href="#down">経歴削除</a>
-    <a class="btn-info" id="download" href="#" download="経歴書.html">保存する</a>
-    <a class="btn-info" id="print" href="#">印刷表示</a>
+    <a class="btn-info" id="addCareer" href="#down" style="display: none;">経歴追加</a>
+    <a class="btn-info" id="deleteButton" href="#down" style="display: none;">経歴削除</a>
+    <a class="btn-info" id="download" href="blob:null/fd2b7532-b629-4990-9c1f-2871c4462a2a" download="経歴書.html" style="display: none;">保存する</a>
+    <a class="btn-info" id="print" href="#" style="display: none;">印刷表示</a>
 </div>
 <script>
 
@@ -359,5 +414,6 @@ document.getElementById("print").addEventListener('click', print, false);
     if (!index) addCareer();
 }
 </script>
-</body>
-</html>
+
+
+</body></html>
