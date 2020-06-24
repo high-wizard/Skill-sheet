@@ -53,15 +53,15 @@
 <td rowspan="2">氏名</td>
 <td><input type="text" placeholder="フリガナ"></td>
 <td rowspan="2">性別</td>
-<td rowspan="2"><input type="text" placeholder="性別" maxlength="3"></td>
+<td rowspan="2" style="text-align:center"><input type="text" placeholder="性別" maxlength="3"></td>
 <td rowspan="2">生年月日</td>
-<td rowspan="2" name="ymd"><input type="number" oninput="sliceMaxLength(this, 8)" placeholder="yyyymmdd" id="birthDay"></td>
+<td rowspan="2" name="ymd" style="text-align:center"><input type="number" oninput="sliceMaxLength(this, 8)" placeholder="yyyymmdd" id="birthDay"></td>
 <td rowspan="2">年齢</td>
-<td rowspan="2" id="age"></td>
+<td rowspan="2" id="age" style="text-align:center"></td>
 </tr>
 
 <tr>
-<td><input type="text" placeholder="氏名"></td>
+<td><input type="text" placeholder="氏名" id="fullName"></td>
 </tr>
 
 <tr>
@@ -115,7 +115,7 @@
     <a class="btn-info" href="./sample.html" target="_blank">見本を見る</a>
     <a class="btn-info" id="addCareer" href="#down">経歴追加</a>
     <a class="btn-info" id="deleteButton" href="#down">経歴削除</a>
-    <a class="btn-info" id="download" href="#" download="経歴書.html">保存する</a>
+    <a class="btn-info" id="download" href="#" download="経歴書_氏名_日付.html">保存する</a>
     <a class="btn-info" id="print" href="#">印刷表示</a>
 </div>
 <script>
@@ -144,6 +144,23 @@ const getAge = () =>
         const age = Math.floor((Number(y1 + m1 + d1) - Number(y2 + m2 + d2)) / 10000);
 
         document.getElementById("age").innerText = age;
+    }
+}
+
+const alertEvent = (event) =>
+{
+    if(event.code == "Backspace" || event.code == "Delete" || event.code == "ArrowLeft" || event.code == "ArrowRight" || event.code == "ArrowUp" || event.code == "ArrowDown")
+    {
+        return;
+    }
+    if(event.code == "Slash" || event.code == "NumpadDivide")
+    {
+        alert("日付の入力に「/」(スラッシュ)は使用しないでください。印刷時に出力されます。")
+        return;
+    }
+    if(Number.isNaN(Number(event.key)))
+    {
+        alert("半角数字を入力してください。")
     }
 }
 
@@ -193,7 +210,7 @@ const addCareer = () =>
     </tr>
     
     <tr>
-        <td name="ym"><input type="number" placeholder="自 年月(yyyymm)" oninput="sliceMaxLength(this, 6)" id="start${index}"></td>
+        <td name="ym"><input type="number" placeholder="自 年月(yyyymm)" oninput="sliceMaxLength(this, 6)" id="start${index}" onkeydown="alertEvent(event)"></td>
         <td rowspan="2"><input type="text" placeholder="●●システム"></td>
         <td rowspan="2"><input type="text" placeholder="人数"></td>
 
@@ -204,7 +221,8 @@ const addCareer = () =>
         <option value="要件定義">要件定義</option>
         <option value="外部設計・基本設計">外部設計・基本設計</option>
         <option value="内部設計・詳細設計">内部設計・詳細設計</option>
-        <option value="プログラム製造・単体テスト">プログラム製造・単体テスト</option>
+        <option value="プログラム製造">プログラム製造</option>
+        <option value="単体テスト">単体テスト</option>
         <option value="総合テスト">総合テスト</option>
         <option value="サポート">サポート</option>
         <option value="オペレーション">オペレーション</option>
@@ -227,12 +245,12 @@ const addCareer = () =>
         <textarea id="Occupation${index}" placeholder="職域(コンボボックスから追加してください)" cols="50" rows="4"></textarea>
         </td>
 
-        <td rowspan="2"><input type="text" placeholder="OS DB 言語"></td>
+        <td rowspan="2"><textarea placeholder="OS DB 言語" style="height: 100px"></textarea></td>
         <td rowspan="2"><input type="text" placeholder="※印刷時自動入力" id="months${index}"></td>
     </tr>
 
     <tr>
-        <td name="ym"><input type="number" placeholder="至 年月(yyyymm)" oninput="sliceMaxLength(this, 6)" id="end${index}"></td>
+        <td name="ym"><input type="number" placeholder="至 年月(yyyymm)" oninput="sliceMaxLength(this, 6)" id="end${index}" onkeydown="alertEvent(event)"></td>
     </tr>
 
     <tr>
@@ -345,11 +363,23 @@ const sliceMaxLength = (elem, maxLength) => {
     elem.value = elem.value.slice(0, maxLength);  
 }  
 
+const saveSetting = (event) => {
+    const fullname = document.getElementById("fullName").value.trim();
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth()+1;
+    const day = date.getDate();
+    const today = `${year}${month}${day}`;
+    document.getElementById("download").download = `経歴書_${fullname}_${today}.html`
+}
+
 document.getElementById("birthDay").addEventListener('change', getAge, false);
 document.getElementById("addCareer").addEventListener('click', addCareer, false);
 document.getElementById("download").addEventListener('click', download, false);
 document.getElementById("deleteButton").addEventListener('click', deleteButton, false);
 document.getElementById("print").addEventListener('click', print, false);
+document.getElementById("birthDay").addEventListener('keydown', (event) => alertEvent(event))
+document.getElementById("fullName").addEventListener('keyup', (event) => saveSetting(event))
 
 {
     // 画面幅800px
